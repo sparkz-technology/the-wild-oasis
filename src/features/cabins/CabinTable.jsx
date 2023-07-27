@@ -3,15 +3,17 @@ import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import { useCabins } from "./useCabins";
+import Table from "../../ui/Table";
+import Menus from "../../ui/Menus";
 
-const Table = styled.div`
-  border: 1px solid var(--color-grey-200);
+// const Table = styled.div`
+//   border: 1px solid var(--color-grey-200);
 
-  font-size: 1.4rem;
-  background-color: var(--color-grey-0);
-  border-radius: 7px;
-  overflow: hidden;
-`;
+//   font-size: 1.4rem;
+//   background-color: var(--color-grey-0);
+//   border-radius: 7px;
+//   overflow: hidden;
+// `;
 
 const TableHeader = styled.header`
   display: grid;
@@ -34,19 +36,22 @@ function CabinTable() {
   if (isLoading) return <Spinner />;
 
   return (
-    <Table role="table">
-      <TableHeader role="row">
-        <div></div>
-        <div>Cabin</div>
-        <div>Capacity</div>
-        <div>Price</div>
-        <div>Discount</div>
-        <div></div>
-      </TableHeader>
-      {cabins.map((cabin) => (
-        <CabinRow cabin={cabin} key={cabin.id} />
-      ))}
-    </Table>
+    <Menus>
+      <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+        <TableHeader role="row">
+          <div></div>
+          <div>Cabin</div>
+          <div>Capacity</div>
+          <div>Price</div>
+          <div>Discount</div>
+          <div></div>
+        </TableHeader>
+        <Table.Body
+          data={cabins}
+          render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
+        />
+      </Table>
+    </Menus>
   );
 }
 
